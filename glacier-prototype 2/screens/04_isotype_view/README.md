@@ -21,13 +21,13 @@
   - Slider → symbols animate in or out per year
   - "Regular" → pictograms gather back into polygons → back to `01_overview`
   - Dropdown → `02_glacier_dropdown`, map → `03_map_expanded`
-- **Data:**
-  - Mass (Loss): `data/[massbalance glacier-wide file].csv` → [annual balance]
-  - Retreat: `data/[lengthchange file].csv` → [cumulative length change]
-  - Area covered: `data/[inventory file].geojson` → [area]
-  - Melt by Elevation: `data/[massbalance elevation-bin file].csv` → [elevation bin, balance]
-  - Thickness: `data/[icethickness file]` → [thickness]
-  - Equilibrium Line: `data/[massbalance glacier-wide file].csv` → [ELA column, if it exists]
+- **Data:** (filter by `glacier id`; "year" = year of `date_end`)
+  - Mass (Loss): `massbalance_fixdate_2025_r2025.csv` → `Ba` (mm w.e.) × `area` (km²), as m³ of water lost, same formula as `01_overview`
+  - Retreat: `lengthchange_2025_r2025.csv` → running sum of `dL` (m)
+  - Area covered: `massbalance_fixdate_2025_r2025.csv` → `area` (km²)
+  - Melt by Elevation: `massbalance_fixdate_elevationbins_2025_r2025.csv` → `Ba` (mm w.e.) per 100 m band (`h_min` to `h_max`, m asl.). One row per band instead of per year, for the selected year
+  - Thickness: `volumechange_2025_r2025_series.csv` → `dh_mean` (m surface lowering per period)
+  - Equilibrium Line: `massbalance_fixdate_2025_r2025.csv` → `ELA` (m asl.)
 - **States:**
   - Default metric shown on arrival
   - One state per metric (add a sketch per metric: `state_mass.jpg`, `state_retreat.jpg`, …)
@@ -37,4 +37,4 @@
   - To confirm: symbol and unit per metric, chosen after looking at the real numbers so rows stay readable (roughly 5 to 50 symbols)
   - To confirm: where the menu sits on screen, and what the two empty rows at the top of the menu card are
   - To confirm: "Melt by Elevation" is here but not on the radar chart. Isotype only?
-  - Thickness is not yearly, so a row per year may not be possible
+  - Thickness uses volume change periods (3+ years each), so rows follow those periods, not single years
