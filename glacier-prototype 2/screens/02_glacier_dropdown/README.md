@@ -11,10 +11,10 @@
   - Click outside → list closes, nothing changes
 - **Data:**
   - Glacier names, IDs and year range: `massbalance_fixdate_2025_r2025.csv` → `glacier name`, `glacier id`, year of `date_end`
-  - Location: `inventory_sgi2016_r2020/SGI_2016_glacier_locations.shp` → [field name for location, check `ReadMe.txt` in that folder], joined on SGI id
+  - Location: `SGI_2016_glaciers.json` has no canton or valley name. Available per glacier: elevation range (`masl_min` to `masl_max`, m asl.) and the outline's centre point (`d3.geoCentroid`)
 - **States:**
   - List open
   - Glacier hovered (highlighted)
 - **Remarks:**
   - To confirm: which glaciers to list. Suggestion: the 11 glaciers with long records listed in `data/README.md`, sorted by name. All 43 would include glaciers with only 3 to 6 years of data
-  - To confirm: what "Location" shows (canton, valley, coordinates)
+  - To confirm: what "Location" shows. The data has no place names, so either show the elevation range (e.g. "1,560–4,160 m") or coordinates, or the team adds a canton for each listed glacier by hand

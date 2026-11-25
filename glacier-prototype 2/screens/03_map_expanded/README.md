@@ -8,13 +8,12 @@
 - **Response:**
   - Map shrinks back to the thumbnail → back to `01_overview` or `04_isotype_view`
 - **Data:**
-  - Outline: `inventory_sgi2016_r2020/SGI_2016_glaciers.shp` → [ID field, check `ReadMe.txt`], geometry. Convert to GeoJSON first (mapshaper.org) and filter to the listed glaciers to keep the file small
-  - Pin: `inventory_sgi2016_r2020/SGI_2016_glacier_locations.shp` → geometry
-  - Coordinates are Swiss LV95, not latitude/longitude. Reproject to WGS84 when converting (in mapshaper: `-proj wgs84`)
+  - Outline: `SGI_2016_glaciers.json` → the feature whose `sgi-id` equals the selected `glacier id`. Already in WGS84 (longitude/latitude), draw with `d3.geoPath` and a projection fitted to that one glacier (`projection.fitSize`)
+  - Pin: the centre of that outline, from `d3.geoCentroid(feature)`
 - **States:**
   - Thumbnail (small, in `01_overview`)
   - Expanded
 - **Remarks:**
-  - To confirm: are the nested lines outlines from different years? Only the 2016 inventory is downloaded. Older outlines need the other inventory releases (1850, 1931, 1973, 2010) or the 2023 one
+  - To confirm: are the nested lines outlines from different years? Only the 2016 outline is in the data. Older outlines would need other inventory releases (1850, 1931, 1973, 2010, 2023)
   - To confirm: does the map react to the year slider?
-  - To confirm: what the pin marks
+  - The pin marks the centre of the glacier outline

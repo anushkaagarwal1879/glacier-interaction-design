@@ -14,8 +14,7 @@ All data: GLAMOS, Glacier Monitoring Switzerland, licence CC BY 4.0. Show the cr
 | `massbalance_fixdate_elevationbins_2025_r2025.csv` | Melt by Elevation |
 | `lengthchange_2025_r2025.csv` | Retreat |
 | `volumechange_2025_r2025_series.csv` | Thinning (mean surface lowering) |
-| `inventory_sgi2016_r2020/SGI_2016_glaciers.shp` | Map outline (convert to GeoJSON) |
-| `inventory_sgi2016_r2020/SGI_2016_glacier_locations.shp` | Map pin (convert to GeoJSON) |
+| `SGI_2016_glaciers.json` | Map outline and pin (GeoJSON, converted from the 2016 inventory shapefile, WGS84) |
 | `icethickness_2020_r2020/<glacier id>_<name>_<source>.txt` | Ice thickness (radar points), optional |
 
 Not used: `massbalance_observation_*` (same data on exact field dates, the `fixdate` files use the hydrological year 1 Oct to 30 Sep, which is easier to compare) and `volumechange_2025_r2025_allcombinations.csv` (overlapping periods).
@@ -82,9 +81,17 @@ glacier name, glacier id, date_start, date_end_winter, date_end, Bw, Bs, Ba (mm 
 
 SGI-ID, source_start, source_end, date_start (yyyymmdd, 9999 = unknown day/month), date_end, A_start (km²), outline_start (yyyy), A_end (km²), outline_end (yyyy), dV (km³), dh_mean (m), Bgeod (m w.e. per year), sigma, covered (%), rho_dv (kg/m³), Name
 
+### `SGI_2016_glaciers.json` (GeoJSON, one polygon feature per glacier, 1,400 features)
+
+Converted with mapshaper from `inventory_sgi2016_r2020/SGI_2016_glaciers.shp` (`-proj wgs84 init=EPSG:2056`). Coordinates are longitude/latitude (WGS84).
+
+Properties per feature: `sgi-id` (e.g. `A10g-04`), `name`, `area_km2`, `length_km`, `masl_min`, `masl_max`, `masl_mean`, `masl_med`, `slope_deg`, `aspect_deg`, `year_acq`, `year_rel`, `gid`, `pk_glacier`, `i_code`, `rl_0` to `rl_3`
+
+Note: the field name `sgi-id` has a hyphen, so in JavaScript use `feature.properties["sgi-id"]`.
+
 ## Joining files
 
-`glacier id` (mass balance, length change) = `SGI-ID` (volume change) = the ID at the start of the ice thickness file names (e.g. `B82-14`). Join on this ID, not on the name.
+`glacier id` (mass balance, length change) = `SGI-ID` (volume change) = `sgi-id` (GeoJSON) = the ID at the start of the ice thickness file names (e.g. `B82-14`). Join on this ID, not on the name.
 
 ## Glaciers
 
